@@ -14,7 +14,7 @@ public class UsuarioService {
     @Autowired
     UsuarioRepositorie usuarioRepositorie;
 
-    public ArrayList<UsuarioModel> obtenerUsuario(){
+    public ArrayList<UsuarioModel> obtenerUsuarios(){
 
         return (ArrayList<UsuarioModel>) usuarioRepositorie.findAll();
 
@@ -26,6 +26,6 @@ public class UsuarioService {
 
     }
 
-    
+
 
 }
