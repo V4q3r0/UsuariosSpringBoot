@@ -31,12 +31,6 @@ public class UsuarioController {
         return usuarioService.obtenerUsuarios();
     }
 
-    //Anotación para indicar que va ser un POST y llamamos el servicio de crear usuario.
-    @PostMapping
-    public UsuarioModel crearUsuario(@RequestBody UsuarioModel usuario){
-        return this.usuarioService.crearUsuario(usuario);
-    }
-
     //Anotación para indicar que es de tipo GET y vamos a enviar un dato y llamamos el servicio de obtener usuario por id.
     @GetMapping(path = "/{id}")
     public Optional<UsuarioModel> obtenerUsuarioPorId(@PathVariable("id") Long id){
@@ -49,15 +43,28 @@ public class UsuarioController {
         return this.usuarioService.obtenerPorPrioridad(prioridad);
     }
 
+    //Anotación para indicar que la petición va ser de tipo GET y enviaremos un parametro para obtener usuario por el nombre
+    @GetMapping(path = "/buscarNombre")
+    public ArrayList<UsuarioModel> obtenerUsuarioPorNombre(@RequestParam("nombre") String nombre){
+        return this.usuarioService.obtenerPorNombre(nombre);
+    }
+
+    //Anotación para indicar que la petición va ser de topo GET y enviaremos un parametro para obtener usuario por email
+    @GetMapping(path = "/buscarEmail")
+    public ArrayList<UsuarioModel> obtenerUsuarioPorEmail(@RequestParam("email") String email){
+        return this.usuarioService.obtenerPorEmail(email);
+    }
+
+    //Anotación para indicar que va ser un POST y llamamos el servicio de crear usuario.
+    @PostMapping
+    public UsuarioModel crearUsuario(@RequestBody UsuarioModel usuario){
+        return this.usuarioService.crearUsuario(usuario);
+    }
+
     //Anotación para indicar que va ser un DELETE y llamamos el servicio de eliminar usuario por id.
     @DeleteMapping(path = "/{id}")
     public String eliminarUsuarioPorId(@PathVariable("id") Long id){
-        boolean ok = this.usuarioService.eliminarPorId(id);
-        if(ok){
-            return "Se ha eliminado el usuario de id: "+id;
-        }else{
-            return "No se ha podido eliminar el usuario de id: "+id;
-        }
+        return this.usuarioService.eliminarPorId(id);
     }
 
 }

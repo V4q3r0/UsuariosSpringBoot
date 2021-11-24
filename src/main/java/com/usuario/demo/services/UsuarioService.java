@@ -19,16 +19,7 @@ public class UsuarioService {
 
     //Método para obtener todos los usuarios
     public ArrayList<UsuarioModel> obtenerUsuarios(){
-
         return (ArrayList<UsuarioModel>) usuarioRepositorie.findAll();
-
-    }
-
-    //Método para crear un usuario - también funciona para actualizar (si se agrega su id).
-    public UsuarioModel crearUsuario(UsuarioModel usuario){
-
-        return usuarioRepositorie.save(usuario);
-
     }
 
     //Método para obtener un usuario indicando su id
@@ -41,13 +32,28 @@ public class UsuarioService {
         return usuarioRepositorie.findByPrioridad(prioridad);
     }
 
+    //Método para llamar la función abstracta de la interface y buscar usuario por su nombre
+    public ArrayList<UsuarioModel> obtenerPorNombre(String nombre){
+        return usuarioRepositorie.findByNombre(nombre);
+    }
+
+    //Método para llamar la función abstracta de la interface y buscar usuario por email
+    public ArrayList<UsuarioModel> obtenerPorEmail(String email){
+        return usuarioRepositorie.findByEmail(email);
+    }
+
+    //Método para crear un usuario - también funciona para actualizar (si se agrega su id).
+    public UsuarioModel crearUsuario(UsuarioModel usuario){
+        return usuarioRepositorie.save(usuario);
+    }
+
     //Método para eliminar un usuario por id
-    public boolean eliminarPorId(Long id){
+    public String eliminarPorId(Long id){
         try{
             usuarioRepositorie.deleteById(id);
-            return true;
+            return "Se ha eliminado al usuario de id: "+id;
         }catch(Exception e){
-            return false;
+            return "No se ha podido eliminar al usuario de id: "+id;
         }
     }
 

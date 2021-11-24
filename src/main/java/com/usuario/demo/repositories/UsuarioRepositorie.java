@@ -14,4 +14,10 @@ public interface UsuarioRepositorie extends CrudRepository<UsuarioModel, Long>{
     //Funcion abstracta para buscar usuario por prioridad
     public abstract ArrayList<UsuarioModel> findByPrioridad(int prioridad);
 
+    //Función abstracta para buscar usuario por nombre
+    public abstract ArrayList<UsuarioModel> findByNombre(String nombre);
+
+    //Función abstracta para buscar usuario por email
+    public abstract ArrayList<UsuarioModel> findByEmail(String email);
+
 }
